@@ -1308,7 +1308,7 @@ function PlayerMovement:reset_hmd_position()
 	mvector3.set_zero(self._hmd_delta)
 end
 
--- Lines 1402-1424
+-- Lines 1402-1425
 function PlayerMovement:trigger_teleport(data)
 	if not data.position then
 		Application:error("[PlayerMovement:trigger_teleport] Tried to teleport without position")
@@ -1322,7 +1322,8 @@ function PlayerMovement:trigger_teleport(data)
 	local sustain = self._teleport_data.sustain
 	local fade_out = self._teleport_data.fade_out
 	self._teleport_t = t + fade_in
-	self._teleport_done_t = self._teleport_t + sustain + fade_out
+	self._teleport_wait_t = self._teleport_t + sustain
+	self._teleport_done_t = self._teleport_wait_t + fade_out
 	local effect = clone(managers.overlay_effect:presets().fade_out_in)
 	effect.fade_in = fade_in
 	effect.sustain = sustain
@@ -1332,7 +1333,7 @@ function PlayerMovement:trigger_teleport(data)
 	self._unit:base():controller():set_enabled(false)
 end
 
--- Lines 1426-1481
+-- Lines 1427-1483
 function PlayerMovement:update_teleport(t, dt)
 	if not self._teleport_data then
 		return
@@ -1375,9 +1376,11 @@ function PlayerMovement:update_teleport(t, dt)
 			})
 		end
 
-		if managers.player:is_carrying() then
+		if managers.player:is_carrying() and not self._teleport_data.keep_carry then
 			managers.player:drop_carry()
 		end
+	elseif self._teleport_wait_t and self._teleport_wait_t < t then
+		self._teleport_wait_t = nil
 
 		self._unit:base():controller():set_enabled(true)
 	elseif self._teleport_done_t and self._teleport_done_t < t then
@@ -1386,16 +1389,16 @@ function PlayerMovement:update_teleport(t, dt)
 	end
 end
 
--- Lines 1483-1485
+-- Lines 1485-1487
 function PlayerMovement:teleporting()
 	return not not self._teleport_data
 end
 
--- Lines 1487-1489
+-- Lines 1489-1491
 function PlayerMovement:has_teleport_data(key)
 	return self._teleport_data and not not self._teleport_data[key]
 end
 
--- Lines 1494-1495
+-- Lines 1496-1497
 function PlayerMovement:on_weapon_add()
 end
