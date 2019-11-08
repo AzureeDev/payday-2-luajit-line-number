@@ -46,7 +46,7 @@ function StatisticsTweakData:statistics_specializations()
 	return table.size(tweak_data.skilltree.specializations)
 end
 
--- Lines 41-289
+-- Lines 41-290
 function StatisticsTweakData:statistics_table()
 	if not self._level_list then
 		self._level_list = {}
@@ -212,7 +212,8 @@ function StatisticsTweakData:statistics_table()
 		"bolivian_indoors",
 		"drug_lord_boss",
 		"drug_lord_boss_stealth",
-		"bolivian_indoors_mex"
+		"bolivian_indoors_mex",
+		"swat_turret"
 	}
 	local armor_list = {
 		"level_1",
@@ -266,7 +267,7 @@ function StatisticsTweakData:statistics_table()
 	return self._level_list, self._job_list, self._mask_list, self._weapon_list, self._melee_list, self._grenade_list, enemy_list, armor_list, character_list, deployable_list, self._suit_list
 end
 
--- Lines 291-293
+-- Lines 292-294
 function StatisticsTweakData:resolution_statistics_table()
 	return {
 		"2560x1440",
@@ -285,7 +286,7 @@ function StatisticsTweakData:resolution_statistics_table()
 	}
 end
 
--- Lines 295-297
+-- Lines 296-298
 function StatisticsTweakData:mission_statistics_table()
 	return {
 		"labrat"

@@ -4457,9 +4457,13 @@ function PlayerInventoryGui:next_secondary()
 	end
 end
 
--- Lines 2930-2960
+-- Lines 2930-2961
 function PlayerInventoryGui:open_melee_menu()
 	local sorted_categories, item_categories, override_slots = managers.blackmarket:get_sorted_melee_weapons()
+	override_slots = override_slots or {
+		4,
+		4
+	}
 	local new_node_data = {}
 	local item_data, selected_tab = nil
 
@@ -4504,7 +4508,7 @@ function PlayerInventoryGui:open_melee_menu()
 	})
 end
 
--- Lines 2962-2970
+-- Lines 2963-2971
 function PlayerInventoryGui:preview_melee()
 	local equipped_melee_weapon = managers.blackmarket:equipped_melee_weapon()
 	local my_tweak_data = tweak_data.blackmarket.melee_weapons[equipped_melee_weapon]
@@ -4515,7 +4519,7 @@ function PlayerInventoryGui:preview_melee()
 	end
 end
 
--- Lines 2972-2980
+-- Lines 2973-2981
 function PlayerInventoryGui:previous_melee()
 	local box = self._boxes_by_name.melee
 
@@ -4534,7 +4538,7 @@ function PlayerInventoryGui:previous_melee()
 	end
 end
 
--- Lines 2982-2990
+-- Lines 2983-2991
 function PlayerInventoryGui:next_melee()
 	local box = self._boxes_by_name.melee
 
@@ -4553,7 +4557,7 @@ function PlayerInventoryGui:next_melee()
 	end
 end
 
--- Lines 2995-3002
+-- Lines 2996-3003
 function PlayerInventoryGui:open_throwable_menu()
 	local new_node_data = {}
 
@@ -4577,7 +4581,7 @@ function PlayerInventoryGui:open_throwable_menu()
 	})
 end
 
--- Lines 3004-3012
+-- Lines 3005-3013
 function PlayerInventoryGui:preview_throwable()
 	local equipped_grenade = managers.blackmarket:equipped_grenade()
 	local my_tweak_data = tweak_data.blackmarket.projectiles[equipped_grenade]
@@ -4588,7 +4592,7 @@ function PlayerInventoryGui:preview_throwable()
 	end
 end
 
--- Lines 3014-3022
+-- Lines 3015-3023
 function PlayerInventoryGui:previous_throwable()
 	local box = self._boxes_by_name.throwable
 
@@ -4603,7 +4607,7 @@ function PlayerInventoryGui:previous_throwable()
 	end
 end
 
--- Lines 3024-3032
+-- Lines 3025-3033
 function PlayerInventoryGui:next_throwable()
 	local box = self._boxes_by_name.throwable
 
@@ -4618,7 +4622,7 @@ function PlayerInventoryGui:next_throwable()
 	end
 end
 
--- Lines 3037-3089
+-- Lines 3038-3090
 function PlayerInventoryGui:open_armor_menu(selected_tab)
 	local new_node_data = {}
 	local override_slots = {
@@ -4654,11 +4658,11 @@ function PlayerInventoryGui:open_armor_menu(selected_tab)
 	})
 end
 
--- Lines 3091-3101
+-- Lines 3092-3102
 function PlayerInventoryGui:preview_armor()
 end
 
--- Lines 3104-3112
+-- Lines 3105-3113
 function PlayerInventoryGui:previous_armor()
 	local box = self._boxes_by_name.outfit_armor
 
@@ -4672,7 +4676,7 @@ function PlayerInventoryGui:previous_armor()
 	end
 end
 
--- Lines 3114-3122
+-- Lines 3115-3123
 function PlayerInventoryGui:next_armor()
 	local box = self._boxes_by_name.outfit_armor
 
@@ -4686,7 +4690,7 @@ function PlayerInventoryGui:next_armor()
 	end
 end
 
--- Lines 3124-3132
+-- Lines 3125-3133
 function PlayerInventoryGui:previous_player_style()
 	local box = self._boxes_by_name.outfit_player_style
 
@@ -4700,7 +4704,7 @@ function PlayerInventoryGui:previous_player_style()
 	end
 end
 
--- Lines 3134-3142
+-- Lines 3135-3143
 function PlayerInventoryGui:next_player_style()
 	local box = self._boxes_by_name.outfit_player_style
 
@@ -4714,7 +4718,7 @@ function PlayerInventoryGui:next_player_style()
 	end
 end
 
--- Lines 3168-3180
+-- Lines 3169-3181
 function PlayerInventoryGui:open_deployable_menu()
 	local override_slots = {
 		3,
@@ -4738,7 +4742,7 @@ function PlayerInventoryGui:open_deployable_menu()
 	})
 end
 
--- Lines 3182-3190
+-- Lines 3183-3191
 function PlayerInventoryGui:preview_deployable()
 	local equipped_deployable = managers.blackmarket:equipped_deployable()
 	local my_tweak_data = tweak_data.equipments[equipped_deployable]
@@ -4749,7 +4753,7 @@ function PlayerInventoryGui:preview_deployable()
 	end
 end
 
--- Lines 3192-3200
+-- Lines 3193-3201
 function PlayerInventoryGui:previous_deployable()
 	local box = self._boxes_by_name.deployable
 
@@ -4763,7 +4767,7 @@ function PlayerInventoryGui:previous_deployable()
 	end
 end
 
--- Lines 3202-3210
+-- Lines 3203-3211
 function PlayerInventoryGui:next_deployable()
 	local box = self._boxes_by_name.deployable
 
@@ -4777,7 +4781,7 @@ function PlayerInventoryGui:next_deployable()
 	end
 end
 
--- Lines 3215-3223
+-- Lines 3216-3224
 function PlayerInventoryGui:previous_deployable_secondary()
 	local box = self._boxes_by_name.deployable
 
@@ -4791,7 +4795,7 @@ function PlayerInventoryGui:previous_deployable_secondary()
 	end
 end
 
--- Lines 3225-3233
+-- Lines 3226-3234
 function PlayerInventoryGui:next_deployable_secondary()
 	local box = self._boxes_by_name.deployable
 
@@ -4805,7 +4809,7 @@ function PlayerInventoryGui:next_deployable_secondary()
 	end
 end
 
--- Lines 3238-3276
+-- Lines 3239-3277
 function PlayerInventoryGui:open_mask_menu()
 	local crafted_category = managers.blackmarket:get_crafted_category("masks") or {}
 	local new_node_data = {
@@ -4865,13 +4869,13 @@ function PlayerInventoryGui:open_mask_menu()
 	})
 end
 
--- Lines 3278-3281
+-- Lines 3279-3282
 function PlayerInventoryGui:preview_mask()
 	managers.blackmarket:view_mask(managers.blackmarket:equipped_mask_slot())
 	managers.menu:open_node("blackmarket_preview_mask_node", {})
 end
 
--- Lines 3283-3292
+-- Lines 3284-3293
 function PlayerInventoryGui:previous_mask()
 	local box = self._boxes_by_name.mask
 
@@ -4886,7 +4890,7 @@ function PlayerInventoryGui:previous_mask()
 	end
 end
 
--- Lines 3294-3303
+-- Lines 3295-3304
 function PlayerInventoryGui:next_mask()
 	local box = self._boxes_by_name.mask
 
@@ -4901,7 +4905,7 @@ function PlayerInventoryGui:next_mask()
 	end
 end
 
--- Lines 3308-3320
+-- Lines 3309-3321
 function PlayerInventoryGui:open_character_menu()
 	local override_slots = {
 		6,
@@ -4928,11 +4932,11 @@ function PlayerInventoryGui:open_character_menu()
 	})
 end
 
--- Lines 3322-3332
+-- Lines 3323-3333
 function PlayerInventoryGui:preview_character()
 end
 
--- Lines 3334-3351
+-- Lines 3335-3352
 function PlayerInventoryGui:previous_character()
 	local box = self._boxes_by_name.character
 
@@ -4960,7 +4964,7 @@ function PlayerInventoryGui:previous_character()
 	end
 end
 
--- Lines 3353-3370
+-- Lines 3354-3371
 function PlayerInventoryGui:next_character()
 	local box = self._boxes_by_name.character
 
@@ -4988,9 +4992,9 @@ function PlayerInventoryGui:next_character()
 	end
 end
 
--- Lines 3376-3384
+-- Lines 3377-3385
 function PlayerInventoryGui:open_infamy_menu()
-	-- Lines 3377-3377
+	-- Lines 3378-3378
 	local function clbk()
 		managers.menu:open_node("infamytree")
 	end
@@ -5005,21 +5009,21 @@ function PlayerInventoryGui:open_infamy_menu()
 	end
 end
 
--- Lines 3388-3390
+-- Lines 3389-3391
 function PlayerInventoryGui:open_crew_menu()
 	managers.menu:open_node("crew_management")
 end
 
--- Lines 3397-3399
+-- Lines 3398-3400
 function PlayerInventoryGui:open_skilltree_menu()
 	managers.menu:open_node("skilltree_new", {})
 end
 
--- Lines 3401-3411
+-- Lines 3402-3412
 function PlayerInventoryGui:preview_skilltree()
 end
 
--- Lines 3413-3425
+-- Lines 3414-3426
 function PlayerInventoryGui:previous_skilltree()
 	local box = self._boxes_by_name.skilltree
 
@@ -5042,7 +5046,7 @@ function PlayerInventoryGui:previous_skilltree()
 	end
 end
 
--- Lines 3427-3439
+-- Lines 3428-3440
 function PlayerInventoryGui:next_skilltree()
 	local box = self._boxes_by_name.skilltree
 
@@ -5065,7 +5069,7 @@ function PlayerInventoryGui:next_skilltree()
 	end
 end
 
--- Lines 3444-3446
+-- Lines 3445-3447
 function PlayerInventoryGui:open_specialization_menu()
 	managers.menu:open_node("skilltree", {
 		{
@@ -5074,11 +5078,11 @@ function PlayerInventoryGui:open_specialization_menu()
 	})
 end
 
--- Lines 3448-3458
+-- Lines 3449-3459
 function PlayerInventoryGui:preview_specialization()
 end
 
--- Lines 3460-3489
+-- Lines 3461-3490
 function PlayerInventoryGui:_update_specialization_box()
 	local box = self._boxes_by_name.specialization
 
@@ -5122,7 +5126,7 @@ function PlayerInventoryGui:_update_specialization_box()
 	end
 end
 
--- Lines 3491-3498
+-- Lines 3492-3499
 function PlayerInventoryGui:previous_specialization()
 	local box = self._boxes_by_name.specialization
 
@@ -5133,7 +5137,7 @@ function PlayerInventoryGui:previous_specialization()
 	end
 end
 
--- Lines 3500-3507
+-- Lines 3501-3508
 function PlayerInventoryGui:next_specialization()
 	local box = self._boxes_by_name.specialization
 
@@ -5144,7 +5148,7 @@ function PlayerInventoryGui:next_specialization()
 	end
 end
 
--- Lines 3515-3530
+-- Lines 3516-3531
 function PlayerInventoryGui:_animate_box(box, selected, instant)
 	if box then
 		if box.children then
@@ -5163,7 +5167,7 @@ function PlayerInventoryGui:_animate_box(box, selected, instant)
 	end
 end
 
--- Lines 3532-3630
+-- Lines 3533-3631
 function PlayerInventoryGui:_update_box_status(box, selected, override_text_string)
 	if not box then
 		return
@@ -5273,7 +5277,7 @@ function PlayerInventoryGui:_update_box_status(box, selected, override_text_stri
 	end
 end
 
--- Lines 3632-3641
+-- Lines 3633-3642
 function PlayerInventoryGui:_update_selected_box(instant)
 	local box = self:_get_selected_box()
 
@@ -5285,12 +5289,12 @@ function PlayerInventoryGui:_update_selected_box(instant)
 	end
 end
 
--- Lines 3643-3645
+-- Lines 3644-3646
 function PlayerInventoryGui:_get_selected_box()
 	return self._data and self._data.selected_box and self._boxes_by_name[self._data.selected_box]
 end
 
--- Lines 3647-3666
+-- Lines 3648-3667
 function PlayerInventoryGui:_set_selected_box(box)
 	local selected_box = self:_get_selected_box()
 
@@ -5314,7 +5318,7 @@ function PlayerInventoryGui:_set_selected_box(box)
 	end
 end
 
--- Lines 3670-3679
+-- Lines 3671-3680
 function PlayerInventoryGui:_get_box_redirected(box_name)
 	local box = self._boxes_by_name[box_name]
 
@@ -5327,7 +5331,7 @@ function PlayerInventoryGui:_get_box_redirected(box_name)
 	end
 end
 
--- Lines 3681-3700
+-- Lines 3682-3701
 function PlayerInventoryGui:_move(dir, box)
 	local move_box = box or self:_get_selected_box()
 
@@ -5352,27 +5356,27 @@ function PlayerInventoryGui:_move(dir, box)
 	end
 end
 
--- Lines 3702-3704
+-- Lines 3703-3705
 function PlayerInventoryGui:move_left()
 	self:_move("left")
 end
 
--- Lines 3706-3708
+-- Lines 3707-3709
 function PlayerInventoryGui:move_right()
 	self:_move("right")
 end
 
--- Lines 3710-3712
+-- Lines 3711-3713
 function PlayerInventoryGui:move_up()
 	self:_move("up")
 end
 
--- Lines 3714-3716
+-- Lines 3715-3717
 function PlayerInventoryGui:move_down()
 	self:_move("down")
 end
 
--- Lines 3718-3723
+-- Lines 3719-3724
 function PlayerInventoryGui:next_page()
 	local box = self:_get_selected_box()
 
@@ -5381,7 +5385,7 @@ function PlayerInventoryGui:next_page()
 	end
 end
 
--- Lines 3725-3730
+-- Lines 3726-3731
 function PlayerInventoryGui:previous_page()
 	local box = self:_get_selected_box()
 
@@ -5390,7 +5394,7 @@ function PlayerInventoryGui:previous_page()
 	end
 end
 
--- Lines 3732-3756
+-- Lines 3733-3757
 function PlayerInventoryGui:special_btn_pressed(button)
 	if button == Idstring("menu_preview_item_alt") then
 		local box = self:_get_selected_box()
@@ -5419,7 +5423,7 @@ function PlayerInventoryGui:special_btn_pressed(button)
 	end
 end
 
--- Lines 3758-3763
+-- Lines 3759-3764
 function PlayerInventoryGui:confirm_pressed()
 	local box = self:_get_selected_box()
 
@@ -5428,12 +5432,12 @@ function PlayerInventoryGui:confirm_pressed()
 	end
 end
 
--- Lines 3767-3769
+-- Lines 3768-3770
 function PlayerInventoryGui:input_focus()
 	return self._panel:visible() and self._input_focus
 end
 
--- Lines 3773-3854
+-- Lines 3774-3855
 function PlayerInventoryGui:mouse_moved(o, x, y)
 	if managers.menu_scene and managers.menu_scene:input_focus() then
 		return false
@@ -5520,7 +5524,7 @@ function PlayerInventoryGui:mouse_moved(o, x, y)
 	return used, pointer
 end
 
--- Lines 3856-3905
+-- Lines 3857-3906
 function PlayerInventoryGui:mouse_pressed(button, x, y)
 	if managers.menu_scene and managers.menu_scene:input_focus() then
 		return false
@@ -5572,7 +5576,7 @@ function PlayerInventoryGui:mouse_pressed(button, x, y)
 	self._multi_profile_item:mouse_pressed(button, x, y)
 end
 
--- Lines 3909-3922
+-- Lines 3910-3923
 function PlayerInventoryGui:unretrieve_box_textures(box)
 	local object = nil
 
@@ -5594,7 +5598,7 @@ function PlayerInventoryGui:unretrieve_box_textures(box)
 	end
 end
 
--- Lines 3924-3948
+-- Lines 3925-3949
 function PlayerInventoryGui:close()
 	for _, box in ipairs(self._boxes) do
 		self:unretrieve_box_textures(box)
@@ -5624,12 +5628,12 @@ function PlayerInventoryGui:close()
 	self._boxes_by_name = {}
 end
 
--- Lines 3950-3956
+-- Lines 3951-3957
 function PlayerInventoryGui:_should_show_description()
 	return IS_WIN_32
 end
 
--- Lines 3963-4019
+-- Lines 3964-4020
 function PlayerInventoryGui:create_text_button(params)
 	local left = params.left or params.x
 	local right = params.right
@@ -5715,7 +5719,7 @@ function PlayerInventoryGui:create_text_button(params)
 	return button_panel
 end
 
--- Lines 4021-4151
+-- Lines 4022-4152
 function PlayerInventoryGui:_get_mods_stats(name, base_stats, equipped_mods, bonus_stats)
 	local mods_stats = {}
 	local modifier_stats = tweak_data.weapon[name].stats_modifiers
@@ -5849,7 +5853,7 @@ function PlayerInventoryGui:_get_mods_stats(name, base_stats, equipped_mods, bon
 	return mods_stats
 end
 
--- Lines 4154-4269
+-- Lines 4155-4270
 function PlayerInventoryGui:_get_melee_weapon_stats(name)
 	local base_stats = {}
 	local mods_stats = {}
@@ -5997,7 +6001,7 @@ function PlayerInventoryGui:_get_melee_weapon_stats(name)
 	return base_stats, mods_stats, skill_stats
 end
 
--- Lines 4271-4368
+-- Lines 4272-4369
 function PlayerInventoryGui:_get_armor_stats(name)
 	local base_stats = {}
 	local mods_stats = {}

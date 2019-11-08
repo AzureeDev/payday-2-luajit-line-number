@@ -540,7 +540,6 @@ end
 -- Lines 582-661
 function CriminalsManager:set_unit(name, unit, ai_loadout)
 	print("[CriminalsManager]:set_unit", name, unit)
-	Application:stack_dump()
 
 	local character = self:character_by_name(name)
 
