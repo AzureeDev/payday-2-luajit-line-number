@@ -2,7 +2,7 @@ DLCTweakData = DLCTweakData or class()
 
 require("lib/tweak_data/GeneratedDLCTweakData")
 
--- Lines 9-4376
+-- Lines 10-4379
 function DLCTweakData:init(tweak_data)
 	if managers.dlc:is_installing() then
 		tweak_data.BUNDLED_DLC_PACKAGES = {}
@@ -111,6 +111,8 @@ function DLCTweakData:init(tweak_data)
 			twitch_pack = 1
 		}
 	end
+
+	self:init_generated()
 
 	self.starvr_free = {
 		free = true,
@@ -7906,6 +7908,4 @@ function DLCTweakData:init(tweak_data)
 			amount = 1
 		}
 	}
-
-	self:init_generated()
 end
