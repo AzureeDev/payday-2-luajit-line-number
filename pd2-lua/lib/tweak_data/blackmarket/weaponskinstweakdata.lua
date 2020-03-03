@@ -1,4 +1,4 @@
--- Lines 1-38669
+-- Lines 1-38767
 function BlackMarketTweakData:_init_weapon_skins()
 	self.weapon_skins = {
 		serbu_woodland = {}
@@ -31677,6 +31677,96 @@ function BlackMarketTweakData:_init_weapon_skins()
 		pattern = Idstring("units/pd2_dlc_tam/pattern/tam_pattern_001_df"),
 		pattern_tweak = Vector3(1.25447, 0, 1)
 	}
+	self.weapon_skins.czech_tam = {
+		name_id = "bm_wskn_czech_tam",
+		desc_id = "bm_wskn_czech_tam_desc",
+		lock_id = "bm_wskn_tam_locked",
+		weapon_id = "czech",
+		global_value = "tam",
+		rarity = "epic",
+		is_a_unlockable = true,
+		bonus = "spread_p1",
+		reserve_quality = true,
+		texture_bundle_folder = "tam/textures/pd2/blackmarket/icons",
+		base_gradient = Idstring("units/pd2_dlc_tam/base_gradient/tam_basegradient_001_df"),
+		pattern_gradient = Idstring("units/pd2_dlc_tam/pattern_gradient/tam_patterngradient_001_df"),
+		pattern = Idstring("units/pd2_dlc_tam/pattern/tam_pattern_001_df")
+	}
+	self.weapon_skins.beer_tam = {
+		name_id = "bm_wskn_beer_tam",
+		desc_id = "bm_wskn_beer_tam_desc",
+		lock_id = "bm_wskn_tam_locked",
+		weapon_id = "beer",
+		global_value = "tam",
+		rarity = "epic",
+		is_a_unlockable = true,
+		bonus = "spread_p1",
+		reserve_quality = true,
+		texture_bundle_folder = "tam/textures/pd2/blackmarket/icons",
+		base_gradient = Idstring("units/pd2_dlc_tam/base_gradient/tam_basegradient_001_df"),
+		pattern_gradient = Idstring("units/pd2_dlc_tam/pattern_gradient/tam_patterngradient_001_df"),
+		pattern = Idstring("units/pd2_dlc_tam/pattern/tam_pattern_001_df")
+	}
+	self.weapon_skins.stech_tam = {
+		name_id = "bm_wskn_stech_tam",
+		desc_id = "bm_wskn_stech_tam_desc",
+		lock_id = "bm_wskn_tam_locked",
+		weapon_id = "stech",
+		global_value = "tam",
+		rarity = "epic",
+		is_a_unlockable = true,
+		bonus = "spread_p1",
+		reserve_quality = true,
+		texture_bundle_folder = "tam/textures/pd2/blackmarket/icons",
+		base_gradient = Idstring("units/pd2_dlc_tam/base_gradient/tam_basegradient_001_df"),
+		pattern_gradient = Idstring("units/pd2_dlc_tam/pattern_gradient/tam_patterngradient_001_df"),
+		pattern = Idstring("units/pd2_dlc_tam/pattern/tam_pattern_001_df")
+	}
+	self.weapon_skins.x_czech_tam = {
+		name_id = "bm_wskn_x_czech_tam",
+		desc_id = "bm_wskn_x_czech_tam_desc",
+		lock_id = "bm_wskn_tam_locked",
+		weapon_id = "x_czech",
+		global_value = "tam",
+		rarity = "epic",
+		is_a_unlockable = true,
+		bonus = "spread_p1",
+		reserve_quality = true,
+		texture_bundle_folder = "tam/textures/pd2/blackmarket/icons",
+		base_gradient = Idstring("units/pd2_dlc_tam/base_gradient/tam_basegradient_001_df"),
+		pattern_gradient = Idstring("units/pd2_dlc_tam/pattern_gradient/tam_patterngradient_001_df"),
+		pattern = Idstring("units/pd2_dlc_tam/pattern/tam_pattern_001_df")
+	}
+	self.weapon_skins.x_beer_tam = {
+		name_id = "bm_wskn_x_beer_tam",
+		desc_id = "bm_wskn_x_beer_tam_desc",
+		lock_id = "bm_wskn_tam_locked",
+		weapon_id = "x_beer",
+		global_value = "tam",
+		rarity = "epic",
+		is_a_unlockable = true,
+		bonus = "spread_p1",
+		reserve_quality = true,
+		texture_bundle_folder = "tam/textures/pd2/blackmarket/icons",
+		base_gradient = Idstring("units/pd2_dlc_tam/base_gradient/tam_basegradient_001_df"),
+		pattern_gradient = Idstring("units/pd2_dlc_tam/pattern_gradient/tam_patterngradient_001_df"),
+		pattern = Idstring("units/pd2_dlc_tam/pattern/tam_pattern_001_df")
+	}
+	self.weapon_skins.x_stech_tam = {
+		name_id = "bm_wskn_x_stech_tam",
+		desc_id = "bm_wskn_x_stech_tam_desc",
+		lock_id = "bm_wskn_tam_locked",
+		weapon_id = "x_stech",
+		global_value = "tam",
+		rarity = "epic",
+		is_a_unlockable = true,
+		bonus = "spread_p1",
+		reserve_quality = true,
+		texture_bundle_folder = "tam/textures/pd2/blackmarket/icons",
+		base_gradient = Idstring("units/pd2_dlc_tam/base_gradient/tam_basegradient_001_df"),
+		pattern_gradient = Idstring("units/pd2_dlc_tam/pattern_gradient/tam_patterngradient_001_df"),
+		pattern = Idstring("units/pd2_dlc_tam/pattern/tam_pattern_001_df")
+	}
 	self.weapon_skins.mp7_cat = {
 		name_id = "bm_wskn_mp7_cat",
 		desc_id = "bm_wskn_mp7_cat_desc",
@@ -37563,7 +37653,7 @@ local weapon_color_variation_template = {
 	}
 }
 
--- Lines 38883-38940
+-- Lines 38981-39038
 function BlackMarketTweakData:populate_weapon_color_skin(weapon_skin_data, base_gradients)
 	weapon_skin_data.base_gradient = base_gradients[weapon_color_skin_template.base_gradient]
 	weapon_skin_data.weapons = {}
@@ -37620,7 +37710,7 @@ function BlackMarketTweakData:populate_weapon_color_skin(weapon_skin_data, base_
 	end
 end
 
--- Lines 38943-38981
+-- Lines 39041-39079
 function BlackMarketTweakData:create_new_color_skin(name, data, base_gradients)
 	data.name_id = "bm_wskn_" .. name
 	data.rarity = "common"
@@ -37656,12 +37746,12 @@ function BlackMarketTweakData:create_new_color_skin(name, data, base_gradients)
 	table.insert(self.weapon_colors, name)
 end
 
--- Lines 38983-38985
+-- Lines 39081-39083
 function BlackMarketTweakData:get_weapon_color_index_string(color_index)
 	return "menu_weapon_color_index_" .. tostring(color_index)
 end
 
--- Lines 38987-39363
+-- Lines 39085-39461
 function BlackMarketTweakData:_setup_weapon_color_skins()
 	self.weapon_color_groups = {}
 	self.weapon_colors = {}
