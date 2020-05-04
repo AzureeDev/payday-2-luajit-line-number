@@ -1232,7 +1232,7 @@ end
 
 -- Lines 1023-1031
 function NewSkillTreeGui:_dialog_respec_trees_yes(trees_idx)
-	for i = 1, #trees_idx, 1 do
+	for i = 1, #trees_idx do
 		local tree_idx = trees_idx[i]
 
 		if self._skilltree:points_spent(tree_idx) > 0 then
@@ -1245,10 +1245,10 @@ end
 
 -- Lines 1033-1044
 function NewSkillTreeGui:_dialog_respec_all_yes()
-	for i = 1, #self._tree_items, 1 do
+	for i = 1, #self._tree_items do
 		local trees_idx = self._tree_items[i]:trees_idx()
 
-		for j = 1, #trees_idx, 1 do
+		for j = 1, #trees_idx do
 			local tree_idx = trees_idx[j]
 
 			if self._skilltree:points_spent(tree_idx) > 0 then
@@ -1266,7 +1266,7 @@ end
 
 -- Lines 1049-1057
 function NewSkillTreeGui:has_tree_spent_points(trees_idx)
-	for i = 1, #trees_idx, 1 do
+	for i = 1, #trees_idx do
 		local tree_idx = trees_idx[i]
 
 		if self._skilltree:points_spent(tree_idx) > 0 then
@@ -1279,10 +1279,10 @@ end
 
 -- Lines 1059-1070
 function NewSkillTreeGui:has_spent_skill_points()
-	for i = 1, #self._tree_items, 1 do
+	for i = 1, #self._tree_items do
 		local trees_idx = self._tree_items[i]:trees_idx()
 
-		for j = 1, #trees_idx, 1 do
+		for j = 1, #trees_idx do
 			local tree_idx = trees_idx[j]
 
 			if self._skilltree:points_spent(tree_idx) > 0 then
@@ -1600,14 +1600,14 @@ end
 
 -- Lines 1310-1314
 function NewSkillTreeGui:on_notify(tree, msg)
-	for i = 1, #self._tree_items, 1 do
+	for i = 1, #self._tree_items do
 		self._tree_items[i]:on_notify(tree, msg)
 	end
 end
 
 -- Lines 1316-1320
 function NewSkillTreeGui:reload_connections()
-	for i = 1, #self._tree_items, 1 do
+	for i = 1, #self._tree_items do
 		self._tree_items[i]:reload_connections()
 	end
 end
@@ -1841,7 +1841,7 @@ end
 
 -- Lines 1506-1510
 function NewSkillTreePage:update(t, dt)
-	for i = 1, #self._trees, 1 do
+	for i = 1, #self._trees do
 		self._trees[i]:update(t, dt)
 	end
 end
@@ -1921,14 +1921,14 @@ end
 
 -- Lines 1573-1577
 function NewSkillTreePage:on_notify(tree, msg)
-	for i = 1, #self._trees, 1 do
+	for i = 1, #self._trees do
 		self._trees[i]:on_notify(tree, msg)
 	end
 end
 
 -- Lines 1579-1583
 function NewSkillTreePage:reload_connections()
-	for i = 1, #self._trees, 1 do
+	for i = 1, #self._trees do
 		self._trees[i]:reload_connections()
 	end
 end
@@ -2085,7 +2085,7 @@ function NewSkillTreeTreeItem:_tree_points()
 	local points_max = nil
 	local points_prev = 0
 
-	for tier = 1, #self._tiers, 1 do
+	for tier = 1, #self._tiers do
 		points_max = managers.skilltree:tier_cost(self._tree, tier)
 
 		if points_spent < points_max then

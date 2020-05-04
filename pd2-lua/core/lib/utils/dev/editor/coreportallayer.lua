@@ -226,7 +226,7 @@ function PortalLayer:draw_portal(data)
 
 	self._portal_brush:set_color(Color(0.75, r, g, b))
 
-	for i = 1, #portal, 1 do
+	for i = 1, #portal do
 		local s_point = portal[i]
 		local e_point = portal[i + 1]
 
@@ -759,7 +759,7 @@ end
 
 -- Lines 677-683
 function PortalLayer:set_selection_shapes_listbox(portals, name)
-	for i = 0, portals:nr_items() - 1, 1 do
+	for i = 0, portals:nr_items() - 1 do
 		if name == portals:get_string(i) then
 			portals:select_index(i)
 		end
@@ -946,7 +946,7 @@ end
 function PortalLayer:set_selection_groups_listbox(name)
 	local groups = self._ctrlrs.groups
 
-	for i = 0, groups:nr_items() - 1, 1 do
+	for i = 0, groups:nr_items() - 1 do
 		if name == groups:get_string(i) then
 			groups:select_index(i)
 		end

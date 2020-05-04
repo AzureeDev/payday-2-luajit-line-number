@@ -67,7 +67,7 @@ function MutatorsCategoryPage:_setup_mutators_list()
 		index = index + 1
 	end
 
-	for i = 1, #self._items, 1 do
+	for i = 1, #self._items do
 		if i > 1 then
 			self._items[i]:link("prev", self._items[i - 1])
 		end

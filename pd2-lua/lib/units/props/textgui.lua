@@ -43,7 +43,7 @@ function TextGui:init(unit)
 
 	self._texts_data = {}
 
-	for i = 1, self.ROWS, 1 do
+	for i = 1, self.ROWS do
 		self._texts_data[i] = {
 			speed = 120 + 240 * math.rand(1),
 			gap = 20,
@@ -269,7 +269,7 @@ end
 
 -- Lines 240-252
 function TextGui:_test()
-	for i = 1, self.ROWS, 1 do
+	for i = 1, self.ROWS do
 		self:clear_row_and_guis(i)
 	end
 
@@ -306,7 +306,7 @@ end
 
 -- Lines 254-267
 function TextGui:_test2()
-	for i = 1, self.ROWS, 1 do
+	for i = 1, self.ROWS do
 		self:clear_row_and_guis(i)
 	end
 

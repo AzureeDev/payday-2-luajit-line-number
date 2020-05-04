@@ -313,7 +313,7 @@ function table.random_key(t)
 	local rand_nr = math.random(table.size(t))
 	local key = nil
 
-	for i = 1, rand_nr, 1 do
+	for i = 1, rand_nr do
 		key = next(t, key)
 	end
 
@@ -397,7 +397,7 @@ function table.shuffled_copy(t)
 
 	local shuffled_copy = clone(t)
 
-	for i = 1, #shuffled_copy - 1, 1 do
+	for i = 1, #shuffled_copy - 1 do
 		local swap_index = math.random(i, #shuffled_copy)
 		local temp = shuffled_copy[i]
 		shuffled_copy[i] = shuffled_copy[swap_index]
@@ -409,7 +409,7 @@ end
 
 -- Lines 359-366
 function table.shuffle(t)
-	for i = 1, #t - 1, 1 do
+	for i = 1, #t - 1 do
 		local swap_index = math.random(i, #t)
 		local temp = t[i]
 		t[i] = t[swap_index]
@@ -542,7 +542,7 @@ end
 function table.range(s, e)
 	local range = {}
 
-	for i = s, e, 1 do
+	for i = s, e do
 		table.insert(range, i)
 	end
 

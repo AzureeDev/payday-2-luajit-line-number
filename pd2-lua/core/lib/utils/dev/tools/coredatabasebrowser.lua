@@ -691,7 +691,7 @@ function CoreDatabaseBrowser:get_meta_data(selected_type, selected)
 	local entry = self._entrys[selected]
 
 	if entry then
-		for i = 1, entry:num_metadatas(), 1 do
+		for i = 1, entry:num_metadatas() do
 			local meta_key = entry:metadata_key(i - 1)
 			local meta_value = entry:metadata_value(i - 1)
 			str = str .. meta_key .. "->" .. meta_value .. "\n"
@@ -707,7 +707,7 @@ function CoreDatabaseBrowser:on_view_metadata()
 
 	if self._main_notebook:get_current_page() == self._main_notebook:get_page(0) then
 		if #self._search_box.list_box:selected_indices() > 0 then
-			for i = 1, #self._search_box.list_box:selected_indices(), 1 do
+			for i = 1, #self._search_box.list_box:selected_indices() do
 				local selected = self._search_box.list_box:get_string(self._search_box.list_box:selected_indices()[i])
 				local entry = self._active_database:lookup(self._entrys[selected]:type(), self._entrys[selected]:name(), self._entrys[selected]:properties())
 
@@ -720,7 +720,7 @@ function CoreDatabaseBrowser:on_view_metadata()
 		local ids = self._tree_box.tree_ctrl:selected_items()
 
 		if #ids > 0 then
-			for i = 1, #ids, 1 do
+			for i = 1, #ids do
 				local selected = self._tree_box.tree_ctrl:get_item_text(ids[i])
 				local entry = self._active_database:lookup(self._entrys[selected]:type(), self._entrys[selected]:name(), self._entrys[selected]:properties())
 
@@ -738,7 +738,7 @@ end
 function CoreDatabaseBrowser:on_set_metadata()
 	if self._main_notebook:get_current_page() == self._main_notebook:get_page(0) then
 		if #self._search_box.list_box:selected_indices() > 0 and self._metadata_dialog:show_modal() then
-			for i = 1, #self._search_box.list_box:selected_indices(), 1 do
+			for i = 1, #self._search_box.list_box:selected_indices() do
 				local selected = self._search_box.list_box:get_string(self._search_box.list_box:selected_indices()[i])
 				local key, value = self._metadata_dialog:get_value()
 				local entry = self._active_database:lookup(self._entrys[selected]:type(), self._entrys[selected]:name(), self._entrys[selected]:properties())
@@ -762,7 +762,7 @@ function CoreDatabaseBrowser:on_set_metadata()
 		local ids = self._tree_box.tree_ctrl:selected_items()
 
 		if #ids > 0 and self._metadata_dialog:show_modal() then
-			for i = 1, #ids, 1 do
+			for i = 1, #ids do
 				local selected = self._tree_box.tree_ctrl:get_item_text(ids[i])
 				local key, value = self._metadata_dialog:get_value()
 				local entry = self._active_database:lookup(self._entrys[selected]:type(), self._entrys[selected]:name(), self._entrys[selected]:properties())

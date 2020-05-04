@@ -1792,7 +1792,7 @@ end
 
 -- Lines 1721-1725
 function CoreWorldCamera:print_points()
-	for i = 1, 4, 1 do
+	for i = 1, 4 do
 		cat_print("debug", i, self._positions[i], self._target_positions[i])
 	end
 end

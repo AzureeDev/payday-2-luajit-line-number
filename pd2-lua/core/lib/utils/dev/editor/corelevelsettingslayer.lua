@@ -26,7 +26,7 @@ end
 function LevelSettingsLayer:get_mission_filter()
 	local t = {}
 
-	for i = 1, 5, 1 do
+	for i = 1, 5 do
 		if self:get_setting("mission_filter_" .. i) then
 			table.insert(t, i)
 		end
@@ -115,7 +115,7 @@ end
 
 -- Lines 101-120
 function LevelSettingsLayer:_add_simulation_mission_filter(sizer)
-	for i = 1, 5, 1 do
+	for i = 1, 5 do
 		local id = "mission_filter_" .. i
 		local ctrlr = EWS:CheckBox(self._ews_panel, "Mission filter " .. i, "")
 

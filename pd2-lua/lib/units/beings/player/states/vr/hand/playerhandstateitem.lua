@@ -267,7 +267,7 @@ end
 -- Lines 230-243
 function PlayerHandStateItem:set_bodies_dynamic(dynamic, ignore_body)
 	if alive(self._item_unit) then
-		for i = 0, self._item_unit:num_bodies() - 1, 1 do
+		for i = 0, self._item_unit:num_bodies() - 1 do
 			local body = self._item_unit:body(i)
 
 			if not ignore_body or body ~= ignore_body then
@@ -284,7 +284,7 @@ end
 -- Lines 245-251
 function PlayerHandStateItem:set_bodies_colliding(colliding)
 	if alive(self._item_unit) then
-		for i = 0, self._item_unit:num_bodies() - 1, 1 do
+		for i = 0, self._item_unit:num_bodies() - 1 do
 			self._item_unit:body(i):set_collisions_enabled(colliding)
 		end
 	end

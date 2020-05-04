@@ -48,7 +48,7 @@ function ControllerManager:_poll_reconnected_controller()
 		local active_xuid = XboxLive:current_user()
 		local nr_controllers = Input:num_controllers()
 
-		for i_controller = 0, nr_controllers - 1, 1 do
+		for i_controller = 0, nr_controllers - 1 do
 			local controller = Input:controller(i_controller)
 
 			if controller:type() == "xb1_controller" and (controller:down(12) or controller:pressed(12)) and controller:user_xuid() == active_xuid then
@@ -262,7 +262,7 @@ end
 
 -- Lines 266-273
 function ControllerManager:get_vr_wrapper_index()
-	for index = 1, self._wrapper_count, 1 do
+	for index = 1, self._wrapper_count do
 		local wrapper_class = self._wrapper_class_map and self._wrapper_class_map[index]
 
 		if wrapper_class and wrapper_class.TYPE == "vr" then
@@ -273,7 +273,7 @@ end
 
 -- Lines 275-284
 function ControllerManager:get_vr_controller()
-	for index = 1, self._wrapper_count, 1 do
+	for index = 1, self._wrapper_count do
 		local wrapper_class = self._wrapper_class_map and self._wrapper_class_map[index]
 
 		if wrapper_class and wrapper_class.TYPE == "vr" then

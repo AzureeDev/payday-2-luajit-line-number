@@ -584,7 +584,7 @@ function _list_selector_add_from_list(params)
 		return
 	end
 
-	for i = 0, params.left_list_box:nr_items() - 1, 1 do
+	for i = 0, params.left_list_box:nr_items() - 1 do
 		params.left_list_box:deselect_index(i)
 
 		for _, selected in ipairs(dialog:_selected_item_assets()) do
@@ -609,7 +609,7 @@ function _list_selector_remove_from_list(params)
 		return
 	end
 
-	for i = 0, params.right_list_box:nr_items() - 1, 1 do
+	for i = 0, params.right_list_box:nr_items() - 1 do
 		params.right_list_box:deselect_index(i)
 
 		for _, selected in ipairs(dialog:_selected_item_assets()) do
@@ -664,7 +664,7 @@ end
 function _list_selector_get_left_box_value(params)
 	local value = {}
 
-	for i = 0, params.left_list_box:nr_items() - 1, 1 do
+	for i = 0, params.left_list_box:nr_items() - 1 do
 		table.insert(value, params.left_list_box:get_string(i))
 	end
 
@@ -675,7 +675,7 @@ end
 function _list_selector_get_value(params)
 	local value = {}
 
-	for i = 0, params.right_list_box:nr_items() - 1, 1 do
+	for i = 0, params.right_list_box:nr_items() - 1 do
 		table.insert(value, params.right_list_box:get_string(i))
 	end
 
@@ -736,7 +736,7 @@ end
 function get_notebook_current_page_index(notebook)
 	local page = notebook:get_current_page()
 
-	for i = 0, notebook:get_page_count() - 1, 1 do
+	for i = 0, notebook:get_page_count() - 1 do
 		if page == notebook:get_page(i) then
 			return i
 		end

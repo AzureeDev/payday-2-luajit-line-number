@@ -58,7 +58,7 @@ function MoneyManager:total_string_no_currency()
 	local reverse = string.reverse(total)
 	local s = ""
 
-	for i = 1, string.len(reverse), 1 do
+	for i = 1, string.len(reverse) do
 		s = s .. string.sub(reverse, i, i) .. (math.mod(i, 3) == 0 and i ~= string.len(reverse) and self._cash_tousand_separator or "")
 	end
 
@@ -72,7 +72,7 @@ function MoneyManager:total_string()
 	local reverse = string.reverse(total)
 	local s = ""
 
-	for i = 1, string.len(reverse), 1 do
+	for i = 1, string.len(reverse) do
 		s = s .. string.sub(reverse, i, i) .. (math.mod(i, 3) == 0 and i ~= string.len(reverse) and self._cash_tousand_separator or "")
 	end
 
@@ -86,7 +86,7 @@ function MoneyManager:total_collected_string_no_currency()
 	local reverse = string.reverse(total)
 	local s = ""
 
-	for i = 1, string.len(reverse), 1 do
+	for i = 1, string.len(reverse) do
 		s = s .. string.sub(reverse, i, i) .. (math.mod(i, 3) == 0 and i ~= string.len(reverse) and self._cash_tousand_separator or "")
 	end
 
@@ -100,7 +100,7 @@ function MoneyManager:total_collected_string()
 	local reverse = string.reverse(total)
 	local s = ""
 
-	for i = 1, string.len(reverse), 1 do
+	for i = 1, string.len(reverse) do
 		s = s .. string.sub(reverse, i, i) .. (math.mod(i, 3) == 0 and i ~= string.len(reverse) and self._cash_tousand_separator or "")
 	end
 
@@ -113,7 +113,7 @@ function MoneyManager:add_decimal_marks_to_string(string)
 	local reverse = string.reverse(total)
 	local s = ""
 
-	for i = 1, string.len(reverse), 1 do
+	for i = 1, string.len(reverse) do
 		s = s .. string.sub(reverse, i, i) .. (math.mod(i, 3) == 0 and i ~= string.len(reverse) and self._cash_tousand_separator or "")
 	end
 
@@ -1209,7 +1209,7 @@ function MoneyManager:get_skilltree_tree_respec_cost(tree, forced_respec_multipl
 			local step = managers.skilltree:skill_step(skill_id)
 
 			if step > 0 then
-				for i = 1, step, 1 do
+				for i = 1, step do
 					value = value + base_point_cost + managers.skilltree:get_skill_points(skill_id, i) * self:get_tweak_value("money_manager", "skilltree", "respec", "point_tier_cost", id)
 				end
 			end
@@ -1297,7 +1297,7 @@ function MoneyManager:get_cost_of_casino_entrance()
 	if managers.experience:current_rank() > 0 then
 		level = #tweak_data.casino.entrance_level
 	else
-		for i = 1, #tweak_data.casino.entrance_level, 1 do
+		for i = 1, #tweak_data.casino.entrance_level do
 			level = i
 
 			if current_level < self:get_tweak_value("casino", "entrance_level", i) then
@@ -1313,7 +1313,7 @@ end
 function MoneyManager:get_cost_of_casino_fee(secured_cards, increase_infamous, preferred_card)
 	local fee = self:get_cost_of_casino_entrance()
 
-	for i = 1, secured_cards, 1 do
+	for i = 1, secured_cards do
 		fee = fee + self:get_tweak_value("casino", "secure_card_cost", i)
 	end
 
@@ -1630,7 +1630,7 @@ function MoneyManager:_present(amount)
 	local reverse = string.reverse(s_amount)
 	local present = ""
 
-	for i = 1, string.len(reverse), 1 do
+	for i = 1, string.len(reverse) do
 		present = present .. string.sub(reverse, i, i) .. (math.mod(i, 3) == 0 and i ~= string.len(reverse) and "," or "")
 	end
 

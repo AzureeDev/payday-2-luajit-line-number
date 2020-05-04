@@ -237,7 +237,7 @@ end
 
 -- Lines 209-216
 function UnitByName:deleted_unit(unit)
-	for i = 0, self._list:item_count() - 1, 1 do
+	for i = 0, self._list:item_count() - 1 do
 		if self._units[self._list:get_item_data(i)] == unit then
 			self._list:delete_item(i)
 
@@ -261,7 +261,7 @@ function UnitByName:selected_unit(unit)
 		self._list:set_item_selected(i, false)
 	end
 
-	for i = 0, self._list:item_count() - 1, 1 do
+	for i = 0, self._list:item_count() - 1 do
 		if self._units[self._list:get_item_data(i)] == unit then
 			self._list:set_item_selected(i, true)
 			self._list:ensure_visible(i)
@@ -291,7 +291,7 @@ function UnitByName:selected_units(units)
 
 	local ensure_visible_key = #units > 0 and units[#units]:key()
 
-	for i = 0, self._list:item_count() - 1, 1 do
+	for i = 0, self._list:item_count() - 1 do
 		local ukey = self._units[self._list:get_item_data(i)]:key()
 
 		if ukeys[ukey] then
@@ -308,7 +308,7 @@ end
 
 -- Lines 271-299
 function UnitByName:unit_name_changed(unit)
-	for i = 0, self._list:item_count() - 1, 1 do
+	for i = 0, self._list:item_count() - 1 do
 		if self._units[self._list:get_item_data(i)] == unit then
 			self._list:set_item(i, 0, unit:unit_data().name_id)
 
@@ -327,7 +327,7 @@ function UnitByName:unit_name_changed(unit)
 			if sort then
 				self:fill_unit_list()
 
-				for i = 0, self._list:item_count() - 1, 1 do
+				for i = 0, self._list:item_count() - 1 do
 					if self._units[self._list:get_item_data(i)] == unit then
 						self._list:set_item_selected(i, true)
 						self._list:ensure_visible(i)

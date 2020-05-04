@@ -2956,7 +2956,7 @@ function MenuCallbackHandler:take_screenshot_skin(item)
 
 	-- Lines 2599-2609
 	local function co_screenshot(o)
-		for i = 0, 5, 1 do
+		for i = 0, 5 do
 			coroutine.yield()
 		end
 
@@ -4625,7 +4625,7 @@ function MenuCallbackHandler:take_armor_screenshot_skin(item)
 
 	-- Lines 3958-3968
 	local function co_screenshot(o)
-		for i = 0, 5, 1 do
+		for i = 0, 5 do
 			coroutine.yield()
 		end
 

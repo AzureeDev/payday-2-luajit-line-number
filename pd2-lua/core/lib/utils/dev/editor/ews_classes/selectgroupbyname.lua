@@ -143,7 +143,7 @@ end
 
 -- Lines 134-141
 function SelectGroupByName:group_removed(group)
-	for i = 0, self._list:item_count() - 1, 1 do
+	for i = 0, self._list:item_count() - 1 do
 		if self._groups[self._list:get_item_data(i)] == group then
 			self._list:delete_item(i)
 
@@ -167,7 +167,7 @@ function SelectGroupByName:group_selected(group)
 		self._list:set_item_selected(i, false)
 	end
 
-	for i = 0, self._list:item_count() - 1, 1 do
+	for i = 0, self._list:item_count() - 1 do
 		if self._groups[self._list:get_item_data(i)] == group then
 			self._list:set_item_selected(i, true)
 			self._list:ensure_visible(i)

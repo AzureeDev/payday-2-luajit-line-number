@@ -26,7 +26,7 @@ function get_prototype(info)
 	local source_file = open_lua_source_file(info.source)
 
 	if source_file then
-		for i = 1, info.linedefined, 1 do
+		for i = 1, info.linedefined do
 			prototype = source_file:gets()
 		end
 
@@ -45,7 +45,7 @@ function get_source(info)
 	local source_file = open_lua_source_file(info.source)
 	local lines = {}
 
-	for i = 1, info.linedefined - 1, 1 do
+	for i = 1, info.linedefined - 1 do
 		local line = source_file:gets()
 
 		if line:match("^%s*%-%-") then
@@ -55,7 +55,7 @@ function get_source(info)
 		end
 	end
 
-	for i = info.linedefined, info.lastlinedefined, 1 do
+	for i = info.linedefined, info.lastlinedefined do
 		table.insert(lines, source_file:gets())
 	end
 
@@ -230,7 +230,7 @@ function tag_print(tag, ...)
 		local str = ""
 		local need_front = true
 
-		for i = 1, select("#", ...), 1 do
+		for i = 1, select("#", ...) do
 			local s, lines = string.gsub(tostring(select(i, ...)), "\n", "\n" .. tag .. "\t")
 
 			if lines > 0 then

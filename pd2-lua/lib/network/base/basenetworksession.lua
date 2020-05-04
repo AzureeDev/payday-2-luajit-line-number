@@ -1313,7 +1313,7 @@ end
 function BaseNetworkSession:_get_peer_outfit_versions_str()
 	local outfit_versions_str = ""
 
-	for peer_id = 1, tweak_data.max_players, 1 do
+	for peer_id = 1, tweak_data.max_players do
 		local peer = nil
 
 		if peer_id == self._local_peer:id() then
@@ -1360,7 +1360,7 @@ end
 
 -- Lines 1354-1366
 function BaseNetworkSession:on_network_stopped()
-	for k = 1, tweak_data.max_players, 1 do
+	for k = 1, tweak_data.max_players do
 		self:on_drop_in_pause_request_received(k, nil, false)
 
 		local peer = self:peer(k)
@@ -1427,7 +1427,7 @@ end
 
 -- Lines 1427-1434
 function BaseNetworkSession:_has_client(peer)
-	for i = 0, Network:clients():num_peers() - 1, 1 do
+	for i = 0, Network:clients():num_peers() - 1 do
 		if Network:clients():ip_at_index(i) == peer:ip() then
 			return true
 		end

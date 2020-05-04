@@ -168,7 +168,7 @@ end
 
 -- Lines 180-184
 function MissionElementListFlow:_autosize_columns(list)
-	for i = 0, list:column_count() - 1, 1 do
+	for i = 0, list:column_count() - 1 do
 		list:autosize_column(i)
 	end
 end
