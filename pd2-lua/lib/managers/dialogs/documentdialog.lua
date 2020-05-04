@@ -208,7 +208,7 @@ function DocumentDialog:update(t, dt)
 	end
 end
 
--- Lines 202-233
+-- Lines 202-236
 function DocumentDialog:update_input(t, dt)
 	if self._data.no_buttons then
 		return
@@ -235,16 +235,23 @@ function DocumentDialog:update_input(t, dt)
 
 	self._move_button_dir = dir
 	self._move_button_time = move_time
-	local scroll = self._controller:get_input_axis("look")
 
-	if self.MOVE_AXIS_LIMIT < scroll.y then
-		self._panel_script:scroll_up(-scroll.y * 250 * dt)
-	elseif scroll.y < -self.MOVE_AXIS_LIMIT then
-		self._panel_script:scroll_down(-math.abs(scroll.y) * 250 * dt)
+	if managers.controller:get_default_wrapper_type() ~= "pc" and managers.controller:get_default_wrapper_type() ~= "steam" then
+		if managers.controller:get_default_wrapper_type() == "vr" then
+			-- Nothing
+		else
+			local scroll = self._controller:get_input_axis("look")
+
+			if self.MOVE_AXIS_LIMIT < scroll.y then
+				self._panel_script:scroll_up(-scroll.y * 250 * dt)
+			elseif scroll.y < -self.MOVE_AXIS_LIMIT then
+				self._panel_script:scroll_down(-math.abs(scroll.y) * 250 * dt)
+			end
+		end
 	end
 end
 
--- Lines 235-276
+-- Lines 238-279
 function DocumentDialog:set_input_enabled(enabled)
 	if not self._input_enabled ~= not enabled then
 		if enabled then
@@ -289,20 +296,20 @@ function DocumentDialog:set_input_enabled(enabled)
 	end
 end
 
--- Lines 278-282
+-- Lines 281-285
 function DocumentDialog:fade_in()
 	DocumentDialog.super.fade_in(self)
 
 	self._fade_in_time = TimerManager:main():time()
 end
 
--- Lines 284-287
+-- Lines 287-290
 function DocumentDialog:fade_out_close()
 	managers.menu:post_event("prompt_exit")
 	self:fade_out()
 end
 
--- Lines 289-295
+-- Lines 292-298
 function DocumentDialog:fade_out()
 	self._fade_out_time = TimerManager:main():time()
 
@@ -313,12 +320,12 @@ function DocumentDialog:fade_out()
 	self:set_input_enabled(false)
 end
 
--- Lines 297-299
+-- Lines 300-302
 function DocumentDialog:is_closing()
 	return self._fade_out_time ~= nil
 end
 
--- Lines 301-305
+-- Lines 304-308
 function DocumentDialog:show()
 	managers.menu:post_event("prompt_enter")
 	self._manager:event_dialog_shown(self)
@@ -326,7 +333,7 @@ function DocumentDialog:show()
 	return true
 end
 
--- Lines 307-312
+-- Lines 310-315
 function DocumentDialog:hide()
 	self:set_input_enabled(false)
 
@@ -336,30 +343,30 @@ function DocumentDialog:hide()
 	self._manager:event_dialog_hidden(self)
 end
 
--- Lines 314-318
+-- Lines 317-321
 function DocumentDialog:_close_dialog_gui()
 	self:set_input_enabled(false)
 	self._panel_script:close()
 	managers.viewport:remove_resolution_changed_func(self._resolution_changed_callback)
 end
 
--- Lines 320-323
+-- Lines 323-326
 function DocumentDialog:close()
 	self:_close_dialog_gui()
 	Dialog.close(self)
 end
 
--- Lines 325-328
+-- Lines 328-331
 function DocumentDialog:force_close()
 	self:_close_dialog_gui()
 	Dialog.force_close(self)
 end
 
--- Lines 330-331
+-- Lines 333-334
 function DocumentDialog:resolution_changed_callback()
 end
 
--- Lines 333-345
+-- Lines 336-348
 function DocumentDialog:remove_mouse()
 	if not self._removed_mouse then
 		self._removed_mouse = true
@@ -374,13 +381,13 @@ function DocumentDialog:remove_mouse()
 	end
 end
 
--- Lines 347-350
+-- Lines 350-353
 function DocumentDialog:button_pressed_callback()
 	self:remove_mouse()
 	self:button_pressed(self._panel_script:get_focus_button())
 end
 
--- Lines 352-365
+-- Lines 355-368
 function DocumentDialog:dialog_cancel_callback()
 	if #self._data.button_list == 1 then
 		self:remove_mouse()
@@ -399,7 +406,7 @@ end
 
 DocumentBoxGui = DocumentBoxGui or class(_G.GrowPanel)
 
--- Lines 372-395
+-- Lines 375-398
 function DocumentBoxGui:init(dialog, ws, data, text_data)
 	self._ws = ws
 	self._data = data
@@ -422,12 +429,12 @@ function DocumentBoxGui:init(dialog, ws, data, text_data)
 	self:set_focus_button(data.focus_button)
 end
 
--- Lines 397-399
+-- Lines 400-402
 function DocumentBoxGui:layer()
 	return self._panel:layer()
 end
 
--- Lines 401-409
+-- Lines 404-412
 function DocumentBoxGui:add_background()
 	if alive(self._fullscreen_ws) then
 		managers.gui_data:destroy_workspace(self._fullscreen_ws)
@@ -458,12 +465,12 @@ function DocumentBoxGui:add_background()
 	})
 end
 
--- Lines 411-413
+-- Lines 414-416
 function DocumentBoxGui:set_centered()
 	self._panel:set_center(self._ws:panel():center())
 end
 
--- Lines 415-521
+-- Lines 418-524
 function DocumentBoxGui:_create_boxgui()
 	local tweak_data = _G.tweak_data
 	local menu_manager = _G.managers.menu
@@ -625,7 +632,7 @@ function DocumentBoxGui:_create_boxgui()
 	end
 end
 
--- Lines 523-550
+-- Lines 526-553
 function DocumentBoxGui:_scroll_update(dt)
 	local element, step = nil
 
@@ -656,47 +663,47 @@ function DocumentBoxGui:_scroll_update(dt)
 	end
 end
 
--- Lines 552-554
+-- Lines 555-557
 function DocumentBoxGui:button_pressed(index)
 	self._dialog:button_pressed(index)
 end
 
--- Lines 556-560
+-- Lines 559-563
 function DocumentBoxGui:hyperlink_pressed(link)
 	if SystemInfo:platform() == Idstring("WIN32") and SystemInfo:distribution() == Idstring("STEAM") then
 		Steam:overlay_activate("url", link)
 	end
 end
 
--- Lines 562-564
+-- Lines 565-567
 function DocumentBoxGui:scroll_up(value)
 	self._text_panel:perform_scroll(-value)
 end
 
--- Lines 566-568
+-- Lines 569-571
 function DocumentBoxGui:scroll_down(value)
 	self._text_panel:perform_scroll(value)
 end
 
--- Lines 570-572
+-- Lines 573-575
 function DocumentBoxGui:release_scroll_bar()
 	self._text_panel:scroll_item():release_scroll_bar()
 end
 
--- Lines 574-575
+-- Lines 577-578
 function DocumentBoxGui:set_focus_button(button)
 end
 
--- Lines 577-578
+-- Lines 580-581
 function DocumentBoxGui:change_focus_button(dir)
 end
 
--- Lines 580-582
+-- Lines 583-585
 function DocumentBoxGui:get_focus_button()
 	return 1
 end
 
--- Lines 584-593
+-- Lines 587-596
 function DocumentBoxGui:set_fade(fade)
 	self:_set_alpha(fade)
 
@@ -709,18 +716,18 @@ function DocumentBoxGui:set_fade(fade)
 	end
 end
 
--- Lines 595-598
+-- Lines 598-601
 function DocumentBoxGui:_set_alpha(alpha)
 	self._panel:set_alpha(alpha)
 	self._panel:set_visible(alpha ~= 0)
 end
 
--- Lines 600-602
+-- Lines 603-605
 function DocumentBoxGui:visible()
 	return self._visible
 end
 
--- Lines 604-618
+-- Lines 607-621
 function DocumentBoxGui:close()
 	self:remove_self()
 

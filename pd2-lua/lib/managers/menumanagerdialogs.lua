@@ -2912,7 +2912,7 @@ function MenuManager:show_movie_theater_unlocked_dialog()
 	managers.system_menu:show(dialog_data)
 end
 
--- Lines 2200-2221
+-- Lines 2200-2222
 function MenuManager:show_accept_telemetry(params)
 	local dialog_data = {
 		title = managers.localization:text("dialog_telemetry_title"),
@@ -2932,6 +2932,7 @@ function MenuManager:show_accept_telemetry(params)
 		text = managers.localization:to_upper_text("dialog_telemetry_decline", {
 			DECLINE = no_legend
 		}),
+		callback_func = params.no_func,
 		cancel_button = true
 	}
 	dialog_data.button_list = {
