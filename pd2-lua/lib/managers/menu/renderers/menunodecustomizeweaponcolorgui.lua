@@ -227,7 +227,7 @@ function MenuCustomizeWeaponColorInitiator:setup_node(node, node_data)
 	return node
 end
 
--- Lines 228-274
+-- Lines 228-281
 function MenuCustomizeWeaponColorInitiator:refresh_node(node)
 	local cosmetic_color_item = node:item("cosmetic_color")
 
@@ -246,9 +246,18 @@ function MenuCustomizeWeaponColorInitiator:refresh_node(node)
 	cosmetic_data.id = color_id
 	cosmetic_data.color_index = color_index
 	cosmetic_data.quality = color_quality
-	local cosmetic_pattern_scale_item = node:item("pattern_scale")
-	local color_pattern_scale = cosmetic_pattern_scale_item:value()
-	cosmetic_data.pattern_scale = color_tweak_data.color_skin_data and color_tweak_data.color_skin_data.pattern_default and color_pattern_scale or nil
+	local pattern_scale = color_tweak_data.pattern_scale
+
+	if pattern_scale then
+		cosmetic_data.pattern_scale = tonumber(pattern_scale) > 0 and pattern_scale or nil
+	elseif MenuCallbackHandler:should_show_pattern_scale() then
+		local cosmetic_pattern_scale_item = node:item("pattern_scale")
+		local color_pattern_scale = cosmetic_pattern_scale_item:value()
+		cosmetic_data.pattern_scale = color_tweak_data.color_skin_data and color_tweak_data.color_skin_data.pattern_default and color_pattern_scale or nil
+	else
+		cosmetic_data.pattern_scale = nil
+	end
+
 	local weapon_unit_data = managers.menu_scene and managers.menu_scene:get_item_unit_data()
 	local weapon_unit = weapon_unit_data and weapon_unit_data.unit
 
@@ -274,7 +283,7 @@ end
 MenuNodeCustomizeWeaponColorGui = MenuNodeCustomizeWeaponColorGui or class(MenuNodeBaseGui)
 MenuNodeCustomizeWeaponColorGui.CUSTOM_MOUSE_INPUT = true
 
--- Lines 281-293
+-- Lines 288-300
 function MenuNodeCustomizeWeaponColorGui:init(node, layer, parameters)
 	parameters.font = tweak_data.menu.pd2_small_font
 	parameters.font_size = tweak_data.menu.pd2_small_font_size
@@ -288,7 +297,7 @@ function MenuNodeCustomizeWeaponColorGui:init(node, layer, parameters)
 	MenuNodeCustomizeWeaponColorGui.super.init(self, node, layer, parameters)
 end
 
--- Lines 295-303
+-- Lines 302-310
 function MenuNodeCustomizeWeaponColorGui:_setup_item_panel_parent(safe_rect, shape)
 	shape = shape or {}
 	shape.x = shape.x or safe_rect.x
@@ -299,13 +308,13 @@ function MenuNodeCustomizeWeaponColorGui:_setup_item_panel_parent(safe_rect, sha
 	MenuNodeCustomizeWeaponColorGui.super._setup_item_panel_parent(self, safe_rect, shape)
 end
 
--- Lines 305-308
+-- Lines 312-315
 function MenuNodeCustomizeWeaponColorGui:setup(node)
 	MenuNodeCustomizeWeaponColorGui.super.setup(self, node)
 	self:update_color_info()
 end
 
--- Lines 310-389
+-- Lines 317-396
 function MenuNodeCustomizeWeaponColorGui:_setup_item_panel(safe_rect, res)
 	MenuNodeCustomizeWeaponColorGui.super._setup_item_panel(self, safe_rect, res)
 
@@ -426,7 +435,7 @@ function MenuNodeCustomizeWeaponColorGui:_setup_item_panel(safe_rect, res)
 	})
 	local start_blur = self.start_blur or 0
 
-	-- Lines 381-384
+	-- Lines 388-391
 	local function func(o)
 		local blur = start_blur
 
@@ -440,7 +449,7 @@ function MenuNodeCustomizeWeaponColorGui:_setup_item_panel(safe_rect, res)
 	self:_set_topic_position()
 end
 
--- Lines 391-408
+-- Lines 398-415
 function MenuNodeCustomizeWeaponColorGui:_update_tab(index)
 	local color_group_data = self.node.color_group_data
 	local tab = self._tabs[index]
@@ -460,7 +469,7 @@ function MenuNodeCustomizeWeaponColorGui:_update_tab(index)
 	end
 end
 
--- Lines 410-420
+-- Lines 417-427
 function MenuNodeCustomizeWeaponColorGui:_set_color_group_index(index)
 	local color_group_data = self.node.color_group_data
 	local new_index = math.clamp(index, 1, #color_group_data.options)
@@ -472,7 +481,7 @@ function MenuNodeCustomizeWeaponColorGui:_set_color_group_index(index)
 	end
 end
 
--- Lines 423-431
+-- Lines 430-438
 function MenuNodeCustomizeWeaponColorGui:input_focus()
 	if self._mouse_over_row_item then
 		local current_item = managers.menu:active_menu().logic:selected_item()
@@ -484,7 +493,7 @@ function MenuNodeCustomizeWeaponColorGui:input_focus()
 	end
 end
 
--- Lines 433-532
+-- Lines 440-539
 function MenuNodeCustomizeWeaponColorGui:mouse_moved(o, x, y)
 	local used = false
 	local icon = "arrow"
@@ -590,7 +599,7 @@ function MenuNodeCustomizeWeaponColorGui:mouse_moved(o, x, y)
 	return used, icon
 end
 
--- Lines 534-607
+-- Lines 541-614
 function MenuNodeCustomizeWeaponColorGui:mouse_pressed(button, x, y)
 	local active_menu = managers.menu:active_menu()
 
@@ -667,7 +676,7 @@ function MenuNodeCustomizeWeaponColorGui:mouse_pressed(button, x, y)
 	end
 end
 
--- Lines 609-617
+-- Lines 616-624
 function MenuNodeCustomizeWeaponColorGui:mouse_released(button, x, y)
 	local item = nil
 
@@ -680,21 +689,21 @@ function MenuNodeCustomizeWeaponColorGui:mouse_released(button, x, y)
 	end
 end
 
--- Lines 619-622
+-- Lines 626-629
 function MenuNodeCustomizeWeaponColorGui:previous_page()
 	local color_group_data = self.node.color_group_data
 
 	self:_set_color_group_index(color_group_data.selected - 1)
 end
 
--- Lines 624-627
+-- Lines 631-634
 function MenuNodeCustomizeWeaponColorGui:next_page()
 	local color_group_data = self.node.color_group_data
 
 	self:_set_color_group_index(color_group_data.selected + 1)
 end
 
--- Lines 629-668
+-- Lines 636-675
 function MenuNodeCustomizeWeaponColorGui:_set_info_shape()
 	local top_align_row_item = self:row_item_by_name("cosmetic_variation")
 	local left = self.item_panel:world_left()
@@ -756,19 +765,19 @@ function MenuNodeCustomizeWeaponColorGui:_set_info_shape()
 	MenuNodeBaseGui.rec_round_object(mini_text)
 end
 
--- Lines 670-673
+-- Lines 677-680
 function MenuNodeCustomizeWeaponColorGui:_set_item_positions()
 	MenuNodeCustomizeWeaponColorGui.super._set_item_positions(self)
 	self:_set_info_shape()
 end
 
--- Lines 675-678
+-- Lines 682-685
 function MenuNodeCustomizeWeaponColorGui:resolution_changed()
 	MenuNodeCustomizeWeaponColorGui.super.resolution_changed(self)
 	self:_set_info_shape()
 end
 
--- Lines 680-762
+-- Lines 687-769
 function MenuNodeCustomizeWeaponColorGui:update_color_info(node)
 	node = node or self.node
 
@@ -785,7 +794,7 @@ function MenuNodeCustomizeWeaponColorGui:update_color_info(node)
 	local info_string = ""
 	local color_range = {}
 
-	-- Lines 693-702
+	-- Lines 700-709
 	local function _add_string(new_string, color, separator)
 		separator = separator or ""
 		local s = utf8.len(info_string) + 1
@@ -851,7 +860,7 @@ function MenuNodeCustomizeWeaponColorGui:update_color_info(node)
 	self:set_mini_info_with_color_range(info_string, color_range)
 end
 
--- Lines 764-772
+-- Lines 771-779
 function MenuNodeGui:set_mini_info_with_color_range(text, color_range)
 	self._mini_info_text:set_text(text)
 	self._mini_info_text:clear_range_color(0, utf8.len(self._mini_info_text:text()))
@@ -861,7 +870,7 @@ function MenuNodeGui:set_mini_info_with_color_range(text, color_range)
 	end
 end
 
--- Lines 774-787
+-- Lines 781-794
 function MenuNodeCustomizeWeaponColorGui:_clear_gui()
 	if alive(self.blur) then
 		self.start_blur = self.blur:alpha()
@@ -880,12 +889,12 @@ function MenuNodeCustomizeWeaponColorGui:_clear_gui()
 	self._tab_panel = nil
 end
 
--- Lines 789-791
+-- Lines 796-798
 function MenuNodeCustomizeWeaponColorGui:_setup_item_rows(node)
 	MenuNodeCustomizeWeaponColorGui.super._setup_item_rows(self, node)
 end
 
--- Lines 793-803
+-- Lines 800-810
 function MenuNodeCustomizeWeaponColorGui:reload_item(item)
 	MenuNodeCustomizeWeaponColorGui.super.reload_item(self, item)
 
@@ -897,13 +906,13 @@ function MenuNodeCustomizeWeaponColorGui:reload_item(item)
 	end
 end
 
--- Lines 805-808
+-- Lines 812-815
 function MenuNodeCustomizeWeaponColorGui:_align_marker(row_item)
 	MenuNodeCustomizeWeaponColorGui.super._align_marker(self, row_item)
 	self._marker_data.marker:set_world_right(self.item_panel:world_right() - self._align_line_padding)
 end
 
--- Lines 810-819
+-- Lines 817-826
 function MenuNodeCustomizeWeaponColorGui:close()
 	for _, row_item in ipairs(self.row_items) do
 		if row_item.item and type(row_item.item.close) == "function" then

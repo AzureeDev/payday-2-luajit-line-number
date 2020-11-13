@@ -1,6 +1,6 @@
 InfamyTweakData = InfamyTweakData or class()
 
--- Lines 3-517
+-- Lines 3-527
 function InfamyTweakData:init()
 	-- Lines 4-4
 	local function digest(value)
@@ -19,6 +19,16 @@ function InfamyTweakData:init()
 		cost_new
 	}
 	self.card_sequences = {}
+	self.statistics_rank_steps = {}
+
+	for i = 0, 100 do
+		table.insert(self.statistics_rank_steps, 1, i)
+	end
+
+	for i = 150, self.ranks, 50 do
+		table.insert(self.statistics_rank_steps, 1, i)
+	end
+
 	self.join_stingers = 17
 	self.icon_rank_step = 100
 	self.infamy_icons = {
@@ -787,7 +797,7 @@ function InfamyTweakData:init()
 	}
 end
 
--- Lines 519-526
+-- Lines 529-536
 function InfamyTweakData:get_infamy_item_rank_requirement(infamy_item)
 	for rank, item in pairs(self.tree) do
 		if item == infamy_item then

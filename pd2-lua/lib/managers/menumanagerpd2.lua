@@ -3481,7 +3481,7 @@ function MenuCallbackHandler:should_show_weapon_color_buy(item)
 end
 
 -- Lines 3132-3143
-function MenuCallbackHandler:should_show_pattern_scale(item)
+function MenuCallbackHandler:should_show_pattern_scale()
 	local weapon_color_data = get_weapon_color_data()
 
 	if not weapon_color_data then
@@ -3492,7 +3492,7 @@ function MenuCallbackHandler:should_show_pattern_scale(item)
 	local color_tweak = tweak_data.blackmarket.weapon_skins[cosmetic_data.id]
 	local color_skin_data = color_tweak.color_skin_data
 
-	return not not color_skin_data.pattern_default
+	return color_tweak.pattern_scale == nil and color_skin_data.pattern_default and true or false
 end
 
 -- Lines 3145-3147

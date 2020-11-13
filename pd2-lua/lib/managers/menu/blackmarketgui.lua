@@ -17228,15 +17228,17 @@ function BlackMarketGui:reload()
 	self:_post_reload()
 end
 
--- Lines 14853-14875
+-- Lines 14853-14877
 function BlackMarketGui:get_safe_for_economy_item(id)
-	-- Lines 14855-14865
+	-- Lines 14855-14867
 	local function find_safe_name(id)
 		for safe_id, safe_data in pairs(tweak_data.economy.contents) do
-			for category, tbl in pairs(safe_data.contains) do
-				for _, item_id in ipairs(tbl) do
-					if id == item_id then
-						return safe_id
+			if safe_data and not safe_data.rarity then
+				for category, tbl in pairs(safe_data.contains) do
+					for _, item_id in ipairs(tbl) do
+						if id == item_id then
+							return safe_id
+						end
 					end
 				end
 			end
@@ -17254,7 +17256,7 @@ function BlackMarketGui:get_safe_for_economy_item(id)
 	return tweak_data.economy.safes[safe_id], safe_id
 end
 
--- Lines 14879-14966
+-- Lines 14881-14968
 function BlackMarketGui:create_preload_ws()
 	if self._preload_ws then
 		return
@@ -17269,12 +17271,12 @@ function BlackMarketGui:create_preload_ws()
 		progress = 1
 	}
 
-	-- Lines 14889-14891
+	-- Lines 14891-14893
 	function new_script.step_progress()
 		new_script.set_progress(new_script.progress + 1)
 	end
 
-	-- Lines 14892-14906
+	-- Lines 14894-14908
 	function new_script.set_progress(progress)
 		new_script.progress = progress
 		local square_panel = panel:child("square_panel")
@@ -17372,7 +17374,7 @@ function BlackMarketGui:create_preload_ws()
 	})
 	panel:script().set_progress(1)
 
-	-- Lines 14960-14964
+	-- Lines 14962-14966
 	local function fade_in_animation(panel)
 		panel:hide()
 		coroutine.yield()
@@ -17382,7 +17384,7 @@ function BlackMarketGui:create_preload_ws()
 	panel:animate(fade_in_animation)
 end
 
--- Lines 14968-14987
+-- Lines 14970-14989
 function BlackMarketGui.blur_panel(panel, bg_alpha)
 	panel:bitmap({
 		texture = "guis/textures/test_blur_df",
@@ -17402,7 +17404,7 @@ function BlackMarketGui.blur_panel(panel, bg_alpha)
 	})
 end
 
--- Lines 14991-15033
+-- Lines 14993-15035
 function BlackMarketGui:buy_crew_item_callback(data)
 	local cost = managers.blackmarket:crew_item_cost(data.name)
 	local macros = {
@@ -17453,14 +17455,14 @@ function BlackMarketGui:buy_crew_item_callback(data)
 	end
 end
 
--- Lines 15035-15039
+-- Lines 15037-15041
 function BlackMarketGui:_confirm_buy_crew_item_callback(data)
 	managers.menu_component:post_event("item_sell")
 	managers.blackmarket:buy_crew_item(data.name)
 	self:reload()
 end
 
--- Lines 15043-15078
+-- Lines 15045-15080
 function BlackMarketGui:create_context_menu(x, y)
 	self:destroy_context_menu()
 
@@ -17521,7 +17523,7 @@ function BlackMarketGui:create_context_menu(x, y)
 	end
 end
 
--- Lines 15080-15089
+-- Lines 15082-15091
 function BlackMarketGui:destroy_context_menu()
 	self._context_menu_btns = {}
 

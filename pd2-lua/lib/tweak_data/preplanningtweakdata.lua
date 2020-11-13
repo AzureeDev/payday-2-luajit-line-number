@@ -51,7 +51,7 @@ function PrePlanningTweakData:get_type_texture_rect(num)
 	}
 end
 
--- Lines 36-1611
+-- Lines 36-1612
 function PrePlanningTweakData:init(tweak_data)
 	self:_create_locations(tweak_data)
 
@@ -1614,6 +1614,10 @@ function PrePlanningTweakData:init(tweak_data)
 		name_id = "menu_pp_asset_fex_stealth_semi_open_garage_door",
 		desc_id = "menu_pp_asset_fex_stealth_semi_open_garage_door_desc",
 		plan = "insider_help",
+		upgrade_lock = {
+			upgrade = "additional_assets",
+			category = "player"
+		},
 		pos_not_important = false,
 		category = "insider_help",
 		icon = 111,
@@ -1625,7 +1629,7 @@ function PrePlanningTweakData:init(tweak_data)
 	}
 end
 
--- Lines 1613-2667
+-- Lines 1614-2668
 function PrePlanningTweakData:_create_locations(tweak_data)
 	self.upgrade_locks = {
 		"none",
@@ -3285,7 +3289,7 @@ function PrePlanningTweakData:_create_locations(tweak_data)
 	}
 end
 
--- Lines 2669-2671
+-- Lines 2670-2672
 function PrePlanningTweakData:get_level_data(level_id)
 	return self.locations[level_id] or {}
 end
