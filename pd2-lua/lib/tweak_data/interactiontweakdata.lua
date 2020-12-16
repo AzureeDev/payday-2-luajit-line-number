@@ -1,6 +1,6 @@
 InteractionTweakData = InteractionTweakData or class()
 
--- Lines 3-6972
+-- Lines 3-6997
 function InteractionTweakData:init(tweak_data)
 	self.CULLING_DISTANCE = 2000
 	self.INTERACT_DISTANCE = 200
@@ -6585,6 +6585,12 @@ function InteractionTweakData:init(tweak_data)
 	self.fex_pickup_harddrive = {
 		text_id = "hud_int_take_fex_harddrive",
 		action_text_id = "hud_action_take_fex_harddrive",
+		timer = 1,
+		interact_distance = 200
+	}
+	self.xm20_int_mask = {
+		text_id = "hud_int_hold_xm20_mask",
+		action_text_id = "hud_action_xm20_mask",
 		timer = 1,
 		interact_distance = 200
 	}

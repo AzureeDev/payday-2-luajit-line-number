@@ -1,6 +1,6 @@
 InfamyTweakData = InfamyTweakData or class()
 
--- Lines 3-527
+-- Lines 3-535
 function InfamyTweakData:init()
 	-- Lines 4-4
 	local function digest(value)
@@ -29,7 +29,11 @@ function InfamyTweakData:init()
 		table.insert(self.statistics_rank_steps, 1, i)
 	end
 
-	self.join_stingers = 17
+	self.join_stingers = 18
+	self.free_join_stingers = {
+		0,
+		18
+	}
 	self.icon_rank_step = 100
 	self.infamy_icons = {
 		{
@@ -590,7 +594,7 @@ function InfamyTweakData:init()
 		}
 	}
 
-	for index = 1, self.join_stingers do
+	for index = 0, self.join_stingers do
 		local item_id = string.format("infamy_stinger_%03d", index)
 		self.items[item_id] = deep_clone(generic_join_stinger_item)
 		self.items[item_id].name_id = "menu_" .. item_id .. "_name"
@@ -797,7 +801,7 @@ function InfamyTweakData:init()
 	}
 end
 
--- Lines 529-536
+-- Lines 537-544
 function InfamyTweakData:get_infamy_item_rank_requirement(infamy_item)
 	for rank, item in pairs(self.tree) do
 		if item == infamy_item then
